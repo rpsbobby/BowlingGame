@@ -1,0 +1,59 @@
+# ---------------------------
+# CLion / JetBrains
+# ---------------------------
+.idea/
+cmake-build-*/
+cmake-build-debug*/
+cmake-build-release*/
+cmake-build-profile*/
+cmake-build-relwithdebinfo*/
+cmake-build-minsizerel*/
+
+# Auto-generated CLion files
+*.iws
+*.iml
+out/
+
+# ---------------------------
+# CMake
+# ---------------------------
+CMakeCache.txt
+CMakeFiles/
+CTestTestfile.cmake
+CTestCostData.txt
+cmake_install.cmake
+Makefile
+build/
+_build/
+*/CMakeCache.txt
+*/CMakeFiles/
+*/cmake_install.cmake
+
+# ---------------------------
+# GoogleTest (if fetched via FetchContent)
+# ---------------------------
+*_deps/
+*_subbuild/
+
+# ---------------------------
+# Compiled files
+# ---------------------------
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+
+# ---------------------------
+# Executables
+# ---------------------------
+*.exe
+*.out
+*.app
+
+# ---------------------------
+# Logs
+# ---------------------------
+*.log

@@ -125,10 +125,10 @@ class BonusTests : public ::testing::TestWithParam<BonusTestCase> {
 };
 
 
-TEST_P(BonusTests, should_validate_bonus_constructor) {
+TEST_P(BonusTests, should_validate_bonus_addition) {
     const auto &[bonus, should_throw, option] = GetParam();
     FrameCounter counter;
-    for (const auto &frame : make_frames(option)) {
+    for (const auto &frame: make_frames(option)) {
         counter.add_frame(frame);
     }
     if (should_throw) {
@@ -139,8 +139,13 @@ TEST_P(BonusTests, should_validate_bonus_constructor) {
 }
 
 static const BonusTestCase bonus_test_cases[] = {
-    {Bonus(), true, FrameFactoryHelper::COMPLETE},
-{Bonus(), true, FrameFactoryHelper::INCOMPLETE},
+    {Bonus(), true, FrameFactoryHelper::COMPLETE}, // complete - no bonus allowed
+    {Bonus(), true, FrameFactoryHelper::INCOMPLETE}, // incomplete - bo bonus
+    {Bonus(BonusType::Spare, 10), true, FrameFactoryHelper::INCOMPLETE},
+    {Bonus(BonusType::Spare, 10), true, FrameFactoryHelper::COMPLETE},
+    {Bonus(BonusType::Spare, 10), true, FrameFactoryHelper::INCOMPLETE},
+    {Bonus(BonusType::Spare, 10), true, FrameFactoryHelper::COMPLETE},
+    {Bonus(BonusType::Spare, 10), false, FrameFactoryHelper::SPARE}, // broken
 };
 
 INSTANTIATE_TEST_SUITE_P(

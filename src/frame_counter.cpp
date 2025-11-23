@@ -6,7 +6,7 @@
 
 #include <stdexcept>
 
-FrameCounter::FrameCounter():_frames(),_bonus() {
+FrameCounter::FrameCounter():_frames() {
 }
 
 void FrameCounter::add_frame(Frame frame) {
@@ -31,6 +31,18 @@ bool FrameCounter::add_bonus(Bonus bonus) {
     if (!with_bonus()) {
         throw std::invalid_argument("No bonus available for this game");
     }
+    if (_frames.back().is_spare() && bonus.type != BonusType::Spare) {
+        throw std::invalid_argument("Wrong type of bonus - spare bonus expected");
+    }
+    if (_frames.back().is_strike() && bonus.type != BonusType::Strike) {
+        throw std::invalid_argument("Wrong type of bonus - strike bonus expected ");
+    }
+    _bonus.emplace(bonus);
+    return _bonus.has_value();
+}
+
+int FrameCounter::get_score() const {
+    return 0;
 }
 
 bool FrameCounter::with_bonus() const {
@@ -39,8 +51,10 @@ bool FrameCounter::with_bonus() const {
 
 bool FrameCounter::is_bonus_valid() const {
     bool frames_valid = with_bonus();
+    if (!frames_valid || !_bonus.has_value())
+        return false;
     if (_frames.back().is_strike())
-        return _bonus.first != invalid && _bonus.second != invalid;
+        return _bonus.value().first != invalid && _bonus.value().second != invalid;
 
-    return _bonus.first != invalid && _bonus.second == invalid;
+    return _bonus.value().first != invalid && _bonus.value().second == invalid;
 }

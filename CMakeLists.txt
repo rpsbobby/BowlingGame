@@ -36,9 +36,16 @@ target_include_directories(bowling_game PUBLIC src)
 # --------------------------
 add_executable(bowling_tests
         test/test_frame.cpp
-        test/test_game.cpp
         test/test_frame_counter.cpp
         test/test_bonus.cpp
+        test/tests_utils.hpp
+        test/test_frame_counter_bonus.cpp
+        test/test_frame_counter_completeness.cpp
+        test/test_bonus_ctor.cpp
+        test/test_frame_spare.cpp
+        test/test_frame_invalid.cpp
+        test/test_frame_counter_completeness_bonus.cpp
+        test/test_frame_counter_scoring.cpp
 )
 
 target_link_libraries(bowling_tests

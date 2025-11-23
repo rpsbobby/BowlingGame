@@ -41,6 +41,11 @@ private:
                     throw std::invalid_argument("invalid spare bonus!");
                 }
                 break;
+            case BonusType::None:
+                if (first != invalid || second != invalid) {
+                    throw std::invalid_argument("invalid default bonus!");
+                }
+                break;
             default:
                 throw std::invalid_argument("unsupported bonus type");
                 break;

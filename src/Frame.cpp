@@ -14,20 +14,24 @@ int Frame::total() const {
     return _first_roll + _second_roll;
 }
 
-bool Frame::is_strike() const {
+bool Frame::is_strike() const noexcept {
     return _first_roll == 10;
 }
 
-bool Frame::is_spare() const {
+bool Frame::is_spare() const noexcept {
     return total() == 10 && _first_roll != 10;
 }
 
-int Frame::first_roll() const {
+int Frame::first_roll() const noexcept {
     return _first_roll;
 }
 
-int Frame::second_roll() const {
+int Frame::second_roll() const noexcept {
     return _second_roll;
+}
+
+bool Frame::is_max() const {
+    return total() == MAX_SCORE;
 }
 
 void Frame::validate_input() {

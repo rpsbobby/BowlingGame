@@ -4,9 +4,9 @@
 
 #ifndef BOWLINGGAMEKATA_BONUS_HPP
 #define BOWLINGGAMEKATA_BONUS_HPP
-#include <array>
-#include <stdexcept>
 
+#include "errors.hpp"
+using namespace bowling;
 
 enum class BonusType {
     None,
@@ -19,38 +19,14 @@ struct Bonus {
     const int first;
     const int second;
 
-    Bonus() : type(BonusType::None), first(invalid), second(invalid) {
-    }
-    Bonus(BonusType t, int r1, int r2 = invalid)
-        : type(t), first(r1), second(r2) {
-        validate();
-    };
+    Bonus();
+
+    Bonus(BonusType t, int r1, int r2 = invalid);;
 
 private:
     static constexpr int invalid = -1;
 
-    void validate() const {
-        switch (type) {
-            case BonusType::Strike:
-                if (first < 0 || first > 10 || second < 0 || second > 10) {
-                    throw std::invalid_argument("invalid strike bonus!");
-                }
-                break;
-            case BonusType::Spare:
-                if (first < 0 || first > 10 || second != invalid) {
-                    throw std::invalid_argument("invalid spare bonus!");
-                }
-                break;
-            case BonusType::None:
-                if (first != invalid || second != invalid) {
-                    throw std::invalid_argument("invalid default bonus!");
-                }
-                break;
-            default:
-                throw std::invalid_argument("unsupported bonus type");
-                break;
-        }
-    }
+    void validate() const;
 };
 
 #endif //BOWLINGGAMEKATA_BONUS_HPP

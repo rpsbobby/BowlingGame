@@ -22,12 +22,11 @@ enable_testing()
 add_library(bowling_game
         src/Frame.cpp
         src/Frame.hpp
-        src/bowling_game.cpp
-        src/bowling_game.hpp
         src/frame_counter.cpp
         src/frame_counter.hpp
         src/bonus.cpp
         src/bonus.hpp
+        src/errors.hpp
 )
 target_include_directories(bowling_game PUBLIC src)
 

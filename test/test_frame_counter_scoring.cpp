@@ -31,10 +31,11 @@ static constexpr ScoreTestCases score_cases[] = {
     {FrameFactoryHelper::GUTTER, BonusFactoryHelper::NONE, 0,},
     {FrameFactoryHelper::ONES, BonusFactoryHelper::NONE, 20,},
     {FrameFactoryHelper::COMPLETE, BonusFactoryHelper::NONE, 90,},
-    {FrameFactoryHelper::SPARE, BonusFactoryHelper::SPARE_0, 100},
-    {FrameFactoryHelper::SPARE, BonusFactoryHelper::SPARE_5, 105},
-    {FrameFactoryHelper::SPARE, BonusFactoryHelper::SPARE_10, 110},
-    {FrameFactoryHelper::ZEROS_AND_LAST_STRIKE, BonusFactoryHelper::STRIKE_10, 30}
+    {FrameFactoryHelper::SPARE, BonusFactoryHelper::SPARE_0, 145},
+    {FrameFactoryHelper::SPARE, BonusFactoryHelper::SPARE_5, 150},
+    {FrameFactoryHelper::SPARE, BonusFactoryHelper::SPARE_10, 155},
+    {FrameFactoryHelper::ZEROS_AND_LAST_STRIKE, BonusFactoryHelper::STRIKE_10, 30},
+    {FrameFactoryHelper::STRIKE, BonusFactoryHelper::STRIKE_10, 300},
 };
 
 INSTANTIATE_TEST_SUITE_P(

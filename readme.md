@@ -1,8 +1,17 @@
 # 🎳 Bowling Game Engine – Modern C++20, TDD, and Full Test Suite
 
-A complete and fully-tested **Bowling scoring engine** implemented in idiomatic **C++20** using a strict **Test-Driven Development** workflow.
+![Build](https://github.com/rpsbobby/BowlingGameKata/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/gh/rpsbobby/BowlingGameKata/branch/main/graph/badge.svg)](https://codecov.io/gh/rpsbobby/BowlingGameKata)
+![Clang-Format](https://img.shields.io/badge/format-clangformat-success)
 
-This project goes beyond the classic kata: it models bowling as a small domain with **Frames**, **Bonuses**, and a **FrameCounter** that enforces all game rules with strong types and explicit error handling.
+---
+
+
+A complete and fully-tested **Bowling scoring engine** implemented in idiomatic **C++20** using a strict **Test-Driven
+Development** workflow.
+
+This project goes beyond the classic kata: it models bowling as a small domain with **Frames**, **Bonuses**, and a *
+*FrameCounter** that enforces all game rules with strong types and explicit error handling.
 
 > **Highlights**
 >
@@ -29,7 +38,7 @@ Implements all official scoring rules:
 ### ✔ Strong Domain Model
 
 | Class          | Responsibility                                                      |
-| -------------- | ------------------------------------------------------------------- |
+|----------------|---------------------------------------------------------------------|
 | `Frame`        | Represents a single frame, validates rolls, identifies strike/spare |
 | `Bonus`        | Enforces valid bonus rules for final frame                          |
 | `FrameCounter` | Core engine: scoring, bonus handling, game completeness             |

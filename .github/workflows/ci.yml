@@ -7,38 +7,37 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  build-test-coverage:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # Install dependencies (cmake, ninja, compilers)
-      - name: Install build tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            cmake \
-            ninja-build \
-            build-essential
+      - name: Install deps
+        run: sudo apt-get update && sudo apt-get install -y ninja-build lcov
 
-      # Configure build using CMake (out-of-source build)
-      - name: Configure
+      - name: Configure CMake (with coverage flags)
         run: |
           cmake -S . -B build -G Ninja \
-            -DCMAKE_CXX_STANDARD=20 \
-            -DCMAKE_BUILD_TYPE=Debug
+                -DCMAKE_BUILD_TYPE=Debug \
+                -DCMAKE_CXX_FLAGS="--coverage" \
+                -DCMAKE_C_FLAGS="--coverage"
 
-      # Build
       - name: Build
-        run: |
-          cmake --build build --config Debug
+        run: cmake --build build
 
-      # Run Tests
-      - name: Run Tests
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Generate coverage report
         run: |
-          echo "run tests"
-          cd build
-          ctest --verbose --output-on-failure
+          lcov --directory build --capture --output-file coverage.info
+          lcov --remove coverage.info '/usr/*' '*/_deps/*' --output-file coverage.info
+          lcov --list coverage.info
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.info
+          fail_ci_if_error: true
